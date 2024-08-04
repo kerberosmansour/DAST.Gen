@@ -2,7 +2,33 @@ from file_summarizer_assistant import FileSummarizerAssistant  # Import the clas
 from datetime import datetime
 
 def generate_cwe_question(cwe_name, language):
-    return f"Read about {cwe_name} based on the content provided in the files attached. Once you are done, think about the different variations {cwe_name} can occur in a web application written in {language} programing language, especially in different (popular frameworks), keeping in mind the common places these vulnerabilities can be detected such as paramter in the URL, body, header of http requests and the indicators of success from the http response. Explain to an author of a DAST tool detection rules what {cwe_name} is, and for each variation write an OWASP ZAP Zest script to detect those vulnerabilities. The goal is to have a low amount of false negatives and false positives during Web Application Testing. Please note Zest Scripts are in JSON Format, please read the attached documentation to help write effective Zest Scripts."
+    return f"""
+**Task: Create OWASP ZAP Zest Scripts for Detecting {cwe_name} Vulnerabilities in {language} Web Applications**
+
+**Instructions:**
+
+1. **Review and Understand {cwe_name}:** 
+   - Read the attached files to understand the nature of {cwe_name} vulnerabilities.
+   - Focus on how this vulnerability typically manifests in web applications written in {language}, particularly within popular frameworks.
+
+2. **Identify Variations and Common Injection Points:**
+   - Consider the different variations of {cwe_name} that can occur in web applications.
+   - Identify common injection points for this vulnerability, such as parameters in the URL, HTTP request bodies, headers, and other relevant areas where these vulnerabilities often appear.
+
+3. **Determine Indicators of Success:**
+   - Analyze typical HTTP responses that indicate the presence of {cwe_name}, which will help distinguish successful detections from false positives.
+
+4. **Write OWASP ZAP Zest Scripts:**
+   - For each identified variation of {cwe_name}, create an OWASP ZAP Zest script in JSON format that effectively detects the vulnerability.
+   - Ensure the scripts are designed to minimize false negatives and false positives during Web Application Testing.
+   - Refer to the attached documentation to ensure the Zest scripts are constructed correctly and are effective in identifying the vulnerabilities.
+
+5. **Documentation and Explanation:**
+   - Provide a clear explanation of what {cwe_name} is, including how it can be exploited.
+   - Detail how each Zest script works, explaining how it detects the specific variations of the vulnerability.
+
+**Objective:** The goal is to create accurate and reliable detection rules for {cwe_name} with a low rate of false positives and false negatives.
+"""
 
 def main():
     file_summarizer = FileSummarizerAssistant()
