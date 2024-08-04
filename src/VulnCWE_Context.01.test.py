@@ -8,32 +8,45 @@ def generate_cwe_question(cwe_name, language):
 **Instructions:**
 
 1. **Review and Understand {cwe_name}:** 
-   - Read the attached files to understand the nature of {cwe_name} vulnerabilities.
-   - Focus on how this vulnerability typically manifests in web applications written in {language}, particularly within popular frameworks.
+   - Read the attached files to gain a thorough understanding of {cwe_name} vulnerabilities.
+   - Focus on how this vulnerability typically manifests in web applications written in {language}, especially within popular frameworks.
+   - Review ZAP Zest scripting documentation to familiarize yourself with key concepts, such as `ZestRequest`, `ZestAssertion`, `ZestAction`, and `ZestExpression`, which will be essential for scripting.
 
 2. **Identify Variations and Common Injection Points:**
-   - Consider the different variations of {cwe_name} that can occur in web applications.
-   - Identify common injection points for this vulnerability, such as parameters in the URL, HTTP request bodies, headers, and other relevant areas where these vulnerabilities often appear.
+   - Consider the different variations of {cwe_name} that may occur in web applications.
+   - Identify common injection points where this vulnerability is likely to appear, such as:
+     - URL parameters
+     - HTTP request bodies
+     - HTTP headers
+     - Cookies
+     - Query strings
+   - Ensure that these variations are addressed in the Zest scripts, with specific focus on areas frequently targeted in {language}-based applications.
 
 3. **Determine Indicators of Success:**
-   - Analyze typical HTTP responses that indicate the presence of {cwe_name}, which will help distinguish successful detections from false positives.
+   - Analyze typical HTTP responses and patterns that indicate the presence of {cwe_name}, such as error messages, status codes, or specific response content.
+   - Use `ZestAssertion` and `ZestExpression` to verify these indicators within the script.
+   - Consider both positive and negative test cases to fine-tune the accuracy of detection.
 
 4. **Write OWASP ZAP Zest Scripts:**
-   - For each identified variation of {cwe_name}, create an OWASP ZAP Zest script in JSON format that effectively detects the vulnerability.
-   - Ensure the scripts are designed to minimize false negatives and false positives during Web Application Testing.
-   - Refer to the attached documentation to ensure the Zest scripts are constructed correctly and are effective in identifying the vulnerabilities.
+   - Create a Zest script in JSON format for each identified variation of {cwe_name}:
+     - Start by defining the `ZestRequest` to simulate the attack vector.
+     - Incorporate `ZestAction` elements to manipulate requests or responses as needed.
+     - Use `ZestAssertion` to check for expected responses that confirm the presence of the vulnerability.
+     - Implement `ZestExpression` to add logic and control flow within the script, handling complex scenarios and variations.
+   - Ensure the scripts are structured to minimize false negatives (missed vulnerabilities) and false positives (incorrect detections).
+   - Reference the attached Zest documentation to confirm proper usage of scripting constructs and methods.
 
 5. **Documentation and Explanation:**
-   - Provide a clear explanation of what {cwe_name} is, including how it can be exploited.
-   - Detail how each Zest script works, explaining how it detects the specific variations of the vulnerability.
+   - Provide a clear explanation of {cwe_name}, detailing how it can be exploited and its impact on web applications.
+   - For each Zest script, explain the logic behind its design, including how it detects specific variations of the vulnerability and the reasoning for chosen injection points and assertions.
 
-**Objective:** The goal is to create accurate and reliable detection rules for {cwe_name} with a low rate of false positives and false negatives.
+**Objective:** The goal is to create precise and reliable Zest scripts that detect {cwe_name} with a low rate of false positives and false negatives, ensuring effective web application security testing.
 """
 
 def main():
     file_summarizer = FileSummarizerAssistant()
     
-    languages = ["C#"]
+    languages = ["Java", "PHP"]
     cwes = {
         "CWE-917": "Improper Neutralization of Special Elements used in an Expression Language Statement ('Expression Language Injection')",
         "CWE-502": "Deserialization of Untrusted Data",
